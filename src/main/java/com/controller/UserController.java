@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +52,7 @@ public class UserController {
 	private String uploadDir;
 	
 	@PostMapping(value = "newmember", consumes = "multipart/form-data")
-	public ResponseEntity<?> createNewUser(@Validated @RequestPart UserEntity userEntity, @RequestPart(required = false) MultipartFile profilePic, HttpSession session) {
+	public ResponseEntity<?> createNewUser(@Validated @RequestBody UserEntity userEntity, @RequestPart MultipartFile profilePic, HttpSession session) {
 		Map<String, Object> msg = new HashMap<>();
 		try	 {
 			StringBuffer sb = new StringBuffer();
@@ -165,7 +166,7 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("updatemember")
+	@PatchMapping("updatemember")
 	public ResponseEntity<?> updateUser(@RequestBody UserEntity userEntity, HttpSession session, Model model) {
 		Map<String, Object> msg = new HashMap<>();
 		String email = session.getAttribute("useremail").toString();

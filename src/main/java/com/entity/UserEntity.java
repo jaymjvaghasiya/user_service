@@ -22,7 +22,7 @@ public class UserEntity {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String userid;
+    private String user_id;
 
     @NotBlank(message = "First name is required")
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
@@ -55,4 +55,8 @@ public class UserEntity {
     private String reset_token = "";
     
     private LocalDateTime reset_token_expiry;
+    
+    private String j_token;
+    
+    private LocalDateTime created_at = LocalDateTime.now();
 }
